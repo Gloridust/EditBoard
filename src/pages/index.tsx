@@ -52,8 +52,14 @@ export default function Home() {
     return (
       <>
         <Head>
-          <title>留言板</title>
-          <meta name="description" content="留言板系统" />
+          <title>{data.title}</title>
+          <meta name="description" content={data.message} />
+          <meta property="og:title" content={data.title} />
+          <meta property="og:description" content={data.message} />
+          <meta property="og:type" content="website" />
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:title" content={data.title} />
+          <meta name="twitter:description" content={data.message} />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="color-scheme" content="light" />
           <link rel="icon" href="/favicon.ico" />

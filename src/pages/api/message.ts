@@ -1,11 +1,47 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { supabase } from '../../lib/supabase'
+
+// 默认数据
+const defaultData = {
+  title: '欢迎来到留言板',
+  message: '这是一个简单的留言板系统。管理员可以在后台修改这里显示的内容。\n\n要使用完整功能，请配置 Supabase 环境变量：\n- NEXT_PUBLIC_SUPABASE_URL\n- NEXT_PUBLIC_SUPABASE_ANON_KEY'
+}
+
+// 检查是否配置了 Supabase
+function hasSupabaseConfig(): boolean {
+  return !!(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
+}
+
+// 获取 Supabase 客户端
+async function getSupabaseClient() {
+  if (!hasSupabaseConfig()) {
+    return null
+  }
+  
+  try {
+    // 使用动态导入避免在没有配置时的错误
+    const supabaseModule = await import('../../lib/supabase')
+    return supabaseModule.supabase
+  } catch (error) {
+    console.error('无法导入 Supabase 客户端:', error)
+    return null
+  }
+}
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method === 'GET') {
+    // 如果没有配置 Supabase，返回默认数据
+    if (!hasSupabaseConfig()) {
+      return res.status(200).json(defaultData)
+    }
+
+    const supabase = await getSupabaseClient()
+    if (!supabase) {
+      return res.status(200).json(defaultData)
+    }
+
     // 获取当前留言板内容
     try {
       const { data, error } = await supabase
@@ -14,15 +50,13 @@ export default async function handler(
         .single()
 
       if (error && error.code !== 'PGRST116') {
-        throw error
+        console.error('Supabase 查询错误:', error)
+        return res.status(200).json(defaultData)
       }
 
       // 如果没有数据，返回默认值
       if (!data) {
-        return res.status(200).json({
-          title: '欢迎来到留言板',
-          message: '这里是默认消息内容'
-        })
+        return res.status(200).json(defaultData)
       }
 
       res.status(200).json({
@@ -31,9 +65,24 @@ export default async function handler(
       })
     } catch (error) {
       console.error('获取留言板数据错误:', error)
-      res.status(500).json({ message: '服务器错误' })
+      // 发生错误时返回默认数据而不是报错
+      res.status(200).json(defaultData)
     }
   } else if (req.method === 'POST') {
+    // 如果没有配置 Supabase，返回错误
+    if (!hasSupabaseConfig()) {
+      return res.status(500).json({ 
+        message: '系统未配置数据库，请联系管理员配置 Supabase 环境变量' 
+      })
+    }
+
+    const supabase = await getSupabaseClient()
+    if (!supabase) {
+      return res.status(500).json({ 
+        message: '数据库连接失败，请检查配置' 
+      })
+    }
+
     // 更新留言板内容（需要管理员权限）
     const { title, message, token } = req.body
 
