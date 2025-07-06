@@ -55,9 +55,10 @@ export default function Home() {
           <title>留言板</title>
           <meta name="description" content="留言板系统" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="color-scheme" content="light" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <main className="min-h-screen bg-gray-50 py-12 px-4">
+        <main className="min-h-screen bg-gray-50 py-12 px-4 text-gray-900" style={{ colorScheme: 'light' }}>
           <div className="max-w-2xl mx-auto">
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
               <h1 className="text-2xl font-semibold text-gray-900 mb-4">
@@ -87,10 +88,11 @@ export default function Home() {
         <meta name="twitter:title" content={data.title} />
         <meta name="twitter:description" content={data.message} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="color-scheme" content="light" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <main className="min-h-screen bg-gray-50 py-12 px-4 text-gray-900" style={{ colorScheme: 'light' }}>
         <div className="max-w-2xl mx-auto">
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
             <h1 className="text-2xl font-semibold text-gray-900 mb-4">
