@@ -129,9 +129,10 @@ export default function Admin() {
           <title>管理员后台 - 留言板</title>
           <meta name="description" content="留言板管理后台" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="color-scheme" content="light" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <main className="min-h-screen bg-gray-50 py-12 px-4">
+        <main className="min-h-screen bg-gray-50 py-12 px-4 text-gray-900" style={{ colorScheme: 'light' }}>
           <div className="max-w-md mx-auto">
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
               <h1 className="text-2xl font-semibold text-gray-900 mb-6 text-center">
@@ -150,10 +151,11 @@ export default function Admin() {
         <title>管理员后台 - 留言板</title>
         <meta name="description" content="留言板管理后台" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="color-scheme" content="light" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <main className="min-h-screen bg-gray-50 py-12 px-4 text-gray-900" style={{ colorScheme: 'light' }}>
         <div className="max-w-md mx-auto">
           {notification && (
             <div className="mb-4 p-4 bg-blue-100 border border-blue-300 rounded-lg text-blue-700">
@@ -177,7 +179,7 @@ export default function Admin() {
                     id="username"
                     value={loginForm.username}
                     onChange={(e) => setLoginForm(prev => ({ ...prev, username: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900"
                     required
                   />
                 </div>
@@ -191,7 +193,7 @@ export default function Admin() {
                     id="password"
                     value={loginForm.password}
                     onChange={(e) => setLoginForm(prev => ({ ...prev, password: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900"
                     required
                   />
                 </div>
@@ -229,7 +231,7 @@ export default function Admin() {
                     id="title"
                     value={messageForm.title}
                     onChange={(e) => setMessageForm(prev => ({ ...prev, title: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900"
                     required
                   />
                 </div>
@@ -243,7 +245,7 @@ export default function Admin() {
                     value={messageForm.message}
                     onChange={(e) => setMessageForm(prev => ({ ...prev, message: e.target.value }))}
                     rows={6}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900"
                     required
                   />
                 </div>
