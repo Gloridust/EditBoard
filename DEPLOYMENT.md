@@ -47,14 +47,9 @@
 1. 设置完环境变量后，触发重新部署
 2. 等待部署完成
 
-### 步骤 6: 初始化数据库
+### 步骤 6: 测试功能
 
-1. 部署完成后，访问：`https://your-domain.vercel.app/api/init`
-2. 应该看到 `{"message":"数据库初始化成功"}` 的响应
-
-### 步骤 7: 测试功能
-
-1. 访问主页：`https://your-domain.vercel.app`
+1. 访问主页：`https://your-domain.vercel.app`（数据库会自动初始化）
 2. 访问管理后台：`https://your-domain.vercel.app/admin`
 3. 使用设置的管理员账号登录
 4. 测试编辑和保存功能

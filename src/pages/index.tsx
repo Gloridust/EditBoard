@@ -13,19 +13,23 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // 加载留言板内容
   const loadMessageBoard = async () => {
     try {
+      setError(null);
       const response = await fetch('/api/message');
       if (response.ok) {
         const data: MessageBoard = await response.json();
         setMessageBoard(data);
       } else {
-        console.error('加载留言板失败');
+        const errorData = await response.json().catch(() => ({ error: '服务器错误' }));
+        setError(errorData.error || '加载留言板失败');
       }
     } catch (error) {
       console.error('加载留言板失败:', error);
+      setError('网络连接失败，请检查网络或稍后重试');
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -85,6 +89,23 @@ export default function Home() {
             <div className="bg-white rounded-lg shadow-md p-8 text-center">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
               <p className="text-gray-600 mt-4">加载中...</p>
+            </div>
+          ) : error ? (
+            <div className="bg-white rounded-lg shadow-md p-8 text-center">
+              <div className="text-red-500 mb-4">
+                <svg className="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.314 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                </svg>
+                <p className="text-lg font-semibold">连接失败</p>
+              </div>
+              <p className="text-gray-600 mb-4">{error}</p>
+              <button
+                onClick={handleRefresh}
+                disabled={refreshing}
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+              >
+                {refreshing ? '重试中...' : '重试'}
+              </button>
             </div>
           ) : messageBoard ? (
             <div className="bg-white rounded-lg shadow-md p-8">

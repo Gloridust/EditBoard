@@ -11,6 +11,7 @@
 - 📋 **一键复制**：方便分享留言板内容
 - 🌐 **社交分享**：优化的 meta 标签，支持微信等平台预览
 - ☁️ **Serverless**：基于 Vercel 和 Vercel Postgres
+- 🚀 **自动初始化**：数据库首次访问时自动创建和初始化
 
 ## 页面结构
 
@@ -63,15 +64,7 @@ ADMIN_PASSWORD=your_secure_password
 JWT_SECRET=your_jwt_secret_key_here
 ```
 
-### 3. 初始化数据库
-
-启动开发服务器后，访问以下 API 初始化数据库：
-
-```bash
-curl -X POST http://localhost:3000/api/init
-```
-
-### 4. 本地开发
+### 3. 本地开发
 
 ```bash
 yarn dev
@@ -79,6 +72,8 @@ yarn dev
 
 访问 `http://localhost:3000` 查看用户页面
 访问 `http://localhost:3000/admin` 进入管理员后台
+
+**注意**: 数据库会在首次访问时自动初始化，无需手动操作。
 
 ## 部署到 Vercel
 
@@ -102,9 +97,9 @@ npx vercel
 - `JWT_SECRET`: JWT 签名密钥
 - 以及所有 Postgres 相关的环境变量
 
-### 4. 初始化生产数据库
+### 4. 自动数据库初始化
 
-部署完成后，访问 `https://your-domain.vercel.app/api/init` 初始化数据库。
+部署完成后，数据库会在首次访问时自动初始化，无需手动操作。
 
 ## 使用说明
 
@@ -140,6 +135,43 @@ src/
 └── styles/
     └── globals.css    # 全局样式
 ```
+
+## 故障排除
+
+### 数据库连接问题
+
+如果遇到数据库连接失败，请检查：
+
+1. **环境变量配置**：确保所有 Postgres 环境变量都正确设置
+2. **网络连接**：确保服务器能够访问 Vercel Postgres
+3. **数据库状态**：访问 `/api/health` 检查数据库连接状态
+4. **重试机制**：系统会自动重试连接，等待片刻后刷新页面
+
+### 数据库测试
+
+运行以下命令测试数据库连接：
+
+```bash
+yarn test:db
+```
+
+此命令会检查：
+- 数据库连接状态
+- 表是否存在
+- 数据记录数量
+
+### 健康检查
+
+访问 `/api/health` 端点可以查看：
+- 数据库连接状态
+- 数据表是否存在
+- 数据记录数量
+
+### 常见错误
+
+- **ECONNRESET**: 网络连接被重置，通常是临时网络问题
+- **fetch failed**: 网络请求失败，检查网络连接
+- **Database connection failed**: 数据库连接失败，检查环境变量
 
 ## 安全注意事项
 
