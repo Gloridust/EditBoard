@@ -1,177 +1,127 @@
-import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
+import { useState, useEffect } from 'react'
+import Head from 'next/head'
 
-interface MessageBoard {
-  id: number;
-  title: string;
-  message: string;
-  updated_at: string;
+interface MessageData {
+  title: string
+  message: string
 }
 
 export default function Home() {
-  const [messageBoard, setMessageBoard] = useState<MessageBoard | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-  const [copySuccess, setCopySuccess] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [data, setData] = useState<MessageData>({
+    title: '欢迎来到留言板',
+    message: '正在加载内容...'
+  })
+  const [isLoading, setIsLoading] = useState(true)
+  const [copySuccess, setCopySuccess] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
-  // 加载留言板内容
-  const loadMessageBoard = async () => {
+  const fetchData = async () => {
+    setIsLoading(true)
     try {
-      setError(null);
-      const response = await fetch('/api/message');
-      if (response.ok) {
-        const data: MessageBoard = await response.json();
-        setMessageBoard(data);
-      } else {
-        const errorData = await response.json().catch(() => ({ error: '服务器错误' }));
-        setError(errorData.error || '加载留言板失败');
-      }
+      const response = await fetch('/api/message')
+      const result = await response.json()
+      setData(result)
     } catch (error) {
-      console.error('加载留言板失败:', error);
-      setError('网络连接失败，请检查网络或稍后重试');
+      console.error('获取数据失败:', error)
+      setData({
+        title: '加载失败',
+        message: '无法获取数据，请稍后重试'
+      })
     } finally {
-      setLoading(false);
-      setRefreshing(false);
+      setIsLoading(false)
     }
-  };
+  }
 
-  // 页面加载时获取数据
-  useEffect(() => {
-    loadMessageBoard();
-  }, []);
-
-  // 刷新按钮处理
-  const handleRefresh = async () => {
-    setRefreshing(true);
-    await loadMessageBoard();
-  };
-
-  // 复制按钮处理
   const handleCopy = async () => {
-    if (!messageBoard) return;
-    
     try {
-      const textToCopy = `${messageBoard.title}\n\n${messageBoard.message}`;
-      await navigator.clipboard.writeText(textToCopy);
-      setCopySuccess(true);
-      setTimeout(() => setCopySuccess(false), 2000);
+      await navigator.clipboard.writeText(data.message)
+      setCopySuccess(true)
+      setTimeout(() => setCopySuccess(false), 2000)
     } catch (error) {
-      console.error('复制失败:', error);
-      // 降级处理：使用传统的复制方法
-      const textArea = document.createElement('textarea');
-      textArea.value = `${messageBoard.title}\n\n${messageBoard.message}`;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
-      setCopySuccess(true);
-      setTimeout(() => setCopySuccess(false), 2000);
+      console.error('复制失败:', error)
     }
-  };
+  }
+
+  useEffect(() => {
+    setMounted(true)
+    fetchData()
+  }, [])
+
+  // 防止 hydration 错误
+  if (!mounted) {
+    return (
+      <>
+        <Head>
+          <title>留言板</title>
+          <meta name="description" content="留言板系统" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <main className="min-h-screen bg-gray-50 py-12 px-4">
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+              <h1 className="text-2xl font-semibold text-gray-900 mb-4">
+                加载中...
+              </h1>
+              <div className="bg-gray-50 rounded-lg p-6 mb-6">
+                <p className="text-gray-700 leading-relaxed">
+                  正在加载内容...
+                </p>
+              </div>
+            </div>
+          </div>
+        </main>
+      </>
+    )
+  }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <>
       <Head>
-        <title>{messageBoard?.title || '留言板'}</title>
-        <meta name="description" content={messageBoard?.message || '留言板系统'} />
-        <meta property="og:title" content={messageBoard?.title || '留言板'} />
-        <meta property="og:description" content={messageBoard?.message || '留言板系统'} />
+        <title>{data.title}</title>
+        <meta name="description" content={data.message} />
+        <meta property="og:title" content={data.title} />
+        <meta property="og:description" content={data.message} />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content={messageBoard?.title || '留言板'} />
-        <meta name="twitter:description" content={messageBoard?.message || '留言板系统'} />
+        <meta name="twitter:title" content={data.title} />
+        <meta name="twitter:description" content={data.message} />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
-      
-      <div className="container mx-auto px-4 py-8">
+
+      <main className="min-h-screen bg-gray-50 py-12 px-4">
         <div className="max-w-2xl mx-auto">
-          {loading ? (
-            <div className="bg-white rounded-lg shadow-md p-8 text-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
-              <p className="text-gray-600 mt-4">加载中...</p>
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+            <h1 className="text-2xl font-semibold text-gray-900 mb-4">
+              {data.title}
+            </h1>
+            
+            <div className="bg-gray-50 rounded-lg p-6 mb-6">
+              <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+                {data.message}
+              </p>
             </div>
-          ) : error ? (
-            <div className="bg-white rounded-lg shadow-md p-8 text-center">
-              <div className="text-red-500 mb-4">
-                <svg className="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.314 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                </svg>
-                <p className="text-lg font-semibold">连接失败</p>
-              </div>
-              <p className="text-gray-600 mb-4">{error}</p>
+
+            <div className="flex gap-3">
               <button
-                onClick={handleRefresh}
-                disabled={refreshing}
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                onClick={fetchData}
+                disabled={isLoading}
+                className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                {refreshing ? '重试中...' : '重试'}
+                {isLoading ? '刷新中...' : '刷新'}
+              </button>
+              
+              <button
+                onClick={handleCopy}
+                className="flex-1 bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition-colors"
+              >
+                {copySuccess ? '已复制!' : '复制内容'}
               </button>
             </div>
-          ) : messageBoard ? (
-            <div className="bg-white rounded-lg shadow-md p-8">
-              <div className="space-y-6">
-                <div className="text-center">
-                  <h1 className="text-3xl font-bold text-gray-800 mb-4">
-                    {messageBoard.title}
-                  </h1>
-                  <div className="border-t border-b border-gray-200 py-6">
-                    <div className="whitespace-pre-wrap text-gray-700 text-lg leading-relaxed">
-                      {messageBoard.message}
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="flex gap-4 justify-center">
-                  <button
-                    onClick={handleRefresh}
-                    disabled={refreshing}
-                    className="flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
-                  >
-                    <svg 
-                      className={`w-5 h-5 ${refreshing ? 'animate-spin' : ''}`} 
-                      fill="none" 
-                      stroke="currentColor" 
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                    </svg>
-                    {refreshing ? '刷新中...' : '刷新'}
-                  </button>
-                  
-                  <button
-                    onClick={handleCopy}
-                    className="flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
-                  >
-                    <svg 
-                      className="w-5 h-5" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                    </svg>
-                    {copySuccess ? '已复制！' : '复制'}
-                  </button>
-                </div>
-                
-                <div className="text-center text-sm text-gray-500">
-                  最后更新：{new Date(messageBoard.updated_at).toLocaleString('zh-CN')}
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="bg-white rounded-lg shadow-md p-8 text-center">
-              <p className="text-gray-600">暂无留言板内容</p>
-              <button
-                onClick={handleRefresh}
-                className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
-              >
-                重新加载
-              </button>
-            </div>
-          )}
+          </div>
         </div>
-      </div>
-    </div>
-  );
+      </main>
+    </>
+  )
 }
