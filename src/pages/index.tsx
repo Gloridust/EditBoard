@@ -62,7 +62,7 @@ export default function Home({ initialData }: HomeProps) {
           <meta property="og:type" content="website" />
           <meta property="og:title" content={data.title} />
           <meta property="og:description" content={data.message} />
-          <meta property="og:image" content="https://edit-board.innovisle.net/api/icon" />
+          <meta property="og:image" content="https://edit-board.innovisle.net/favicon.ico" />
           <meta property="og:url" content="https://edit-board.innovisle.net/" />
           
           <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -97,8 +97,8 @@ export default function Home({ initialData }: HomeProps) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={data.title} />
         <meta property="og:description" content={data.message} />
-        <meta property="og:image" content="https://edit-board.vercel.app/api/icon" />
-        <meta property="og:url" content="https://edit-board.vercel.app/" />
+        <meta property="og:image" content="https://edit-board.innovisle.net/favicon.ico" />
+        <meta property="og:url" content="https://edit-board.innovisle.net/" />
         
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content="light" />
