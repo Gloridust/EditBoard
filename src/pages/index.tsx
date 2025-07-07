@@ -58,29 +58,16 @@ export default function Home({ initialData }: HomeProps) {
           <title>{data.title}</title>
           <meta name="description" content={data.message} />
           
-          {/* Open Graph 标签 */}
+          {/* Open Graph 标签 - 用于微信分享 */}
+          <meta property="og:type" content="website" />
           <meta property="og:title" content={data.title} />
           <meta property="og:description" content={data.message} />
-          <meta property="og:type" content="website" />
-          <meta property="og:image" content="https://edit-board.vercel.app/api/icon" />
-          <meta property="og:image:width" content="512" />
-          <meta property="og:image:height" content="512" />
-          <meta property="og:image:type" content="image/png" />
-          
-          {/* Twitter Card 标签 */}
-          <meta name="twitter:card" content="summary" />
-          <meta name="twitter:title" content={data.title} />
-          <meta name="twitter:description" content={data.message} />
-          <meta name="twitter:image" content="https://edit-board.vercel.app/api/icon" />
-          
-          {/* 微信专用标签 */}
-          <meta property="og:image:secure_url" content="https://edit-board.vercel.app/api/icon" />
-          <meta name="image" content="https://edit-board.vercel.app/api/icon" />
+          <meta property="og:image" content="https://edit-board.innovisle.net/api/icon" />
+          <meta property="og:url" content="https://edit-board.innovisle.net/" />
           
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="color-scheme" content="light" />
           <link rel="icon" href="/favicon.ico" />
-          <link rel="apple-touch-icon" href="/favicon.ico" />
         </Head>
         <main className="min-h-screen bg-gray-50 py-12 px-4 text-gray-900" style={{ colorScheme: 'light' }}>
           <div className="max-w-2xl mx-auto">
@@ -106,29 +93,16 @@ export default function Home({ initialData }: HomeProps) {
         <title>{data.title}</title>
         <meta name="description" content={data.message} />
         
-        {/* Open Graph 标签 */}
+        {/* Open Graph 标签 - 用于微信分享 */}
+        <meta property="og:type" content="website" />
         <meta property="og:title" content={data.title} />
         <meta property="og:description" content={data.message} />
-        <meta property="og:type" content="website" />
         <meta property="og:image" content="https://edit-board.vercel.app/api/icon" />
-        <meta property="og:image:width" content="512" />
-        <meta property="og:image:height" content="512" />
-        <meta property="og:image:type" content="image/png" />
-        
-        {/* Twitter Card 标签 */}
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content={data.title} />
-        <meta name="twitter:description" content={data.message} />
-        <meta name="twitter:image" content="https://edit-board.vercel.app/api/icon" />
-        
-        {/* 微信专用标签 */}
-        <meta property="og:image:secure_url" content="https://edit-board.vercel.app/api/icon" />
-        <meta name="image" content="https://edit-board.vercel.app/api/icon" />
+        <meta property="og:url" content="https://edit-board.vercel.app/" />
         
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content="light" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/favicon.ico" />
       </Head>
 
       <main className="min-h-screen bg-gray-50 py-12 px-4 text-gray-900" style={{ colorScheme: 'light' }}>
