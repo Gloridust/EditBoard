@@ -10,15 +10,15 @@ export default function Document() {
         <link rel="shortcut icon" href="/favicon.ico" />
         
         {/* 预览图标相关 */}
-        <meta property="og:image" content="/favicon.ico" />
+        <meta property="og:image" content="https://edit-board.innovisle.net/favicon.png" />
         <meta property="og:image:type" content="image/x-icon" />
         <meta property="og:image:width" content="300" />
         <meta property="og:image:height" content="300" />
-        <meta name="twitter:image" content="/favicon.ico" />
+        <meta name="twitter:image" content="/favicon.png" />
         
         {/* 微信分享图标 */}
-        <meta name="image" content="/favicon.ico" />
-        <meta property="og:image:secure_url" content="/favicon.ico" />
+        <meta name="image" content="https://edit-board.innovisle.net/favicon.png" />
+        <meta property="og:image:secure_url" content="https://edit-board.innovisle.net/favicon.png" />
       </Head>
       <body className="bg-gray-50 text-gray-900">
         <Main />
