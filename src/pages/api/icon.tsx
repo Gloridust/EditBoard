@@ -9,19 +9,11 @@ export default function handler() {
     (
       <div
         style={{
-          fontSize: 128,
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          background: '#FFFFFF',
           width: '100%',
           height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: 'white',
-          fontFamily: 'Arial, sans-serif',
-          fontWeight: 'bold',
         }}
       >
-        留言板
       </div>
     ),
     {
