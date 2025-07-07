@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
+import { GetServerSideProps } from 'next'
 
 interface MessageData {
   title: string
   message: string
 }
 
-export default function Home() {
-  const [data, setData] = useState<MessageData>({
-    title: '欢迎来到留言板',
-    message: '正在加载内容...'
-  })
-  const [isLoading, setIsLoading] = useState(true)
+interface HomeProps {
+  initialData: MessageData
+}
+
+export default function Home({ initialData }: HomeProps) {
+  const [data, setData] = useState<MessageData>(initialData)
+  const [isLoading, setIsLoading] = useState(false)
   const [copySuccess, setCopySuccess] = useState(false)
   const [mounted, setMounted] = useState(false)
 
@@ -44,6 +46,7 @@ export default function Home() {
 
   useEffect(() => {
     setMounted(true)
+    // 组件挂载后再次获取最新数据
     fetchData()
   }, [])
 
@@ -68,11 +71,11 @@ export default function Home() {
           <div className="max-w-2xl mx-auto">
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
               <h1 className="text-2xl font-semibold text-gray-900 mb-4">
-                加载中...
+                {data.title}
               </h1>
               <div className="bg-gray-50 rounded-lg p-6 mb-6">
-                <p className="text-gray-700 leading-relaxed">
-                  正在加载内容...
+                <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+                  {data.message}
                 </p>
               </div>
             </div>
@@ -132,4 +135,63 @@ export default function Home() {
       </main>
     </>
   )
+}
+
+// 服务器端渲染，确保微信爬虫能获取到正确的 meta 信息
+export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
+  const defaultData: MessageData = {
+    title: '欢迎来到留言板',
+    message: '这是一个简单的留言板系统。管理员可以在后台修改这里显示的内容。'
+  }
+
+  try {
+    // 检查是否配置了 Supabase
+    const hasSupabaseConfig = !!(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
+    
+    if (!hasSupabaseConfig) {
+      return {
+        props: {
+          initialData: {
+            title: '欢迎来到留言板',
+            message: '这是一个简单的留言板系统。管理员可以在后台修改这里显示的内容。\n\n要使用完整功能，请配置 Supabase 环境变量：\n- NEXT_PUBLIC_SUPABASE_URL\n- NEXT_PUBLIC_SUPABASE_ANON_KEY'
+          }
+        }
+      }
+    }
+
+    // 尝试获取数据库中的数据
+    const supabaseModule = await import('../lib/supabase')
+    const { supabase } = supabaseModule
+
+    const { data, error } = await supabase
+      .from('message_board')
+      .select('*')
+      .single()
+
+    if (error || !data) {
+      // 如果没有数据或出错，返回默认数据
+      return {
+        props: {
+          initialData: defaultData
+        }
+      }
+    }
+
+    return {
+      props: {
+        initialData: {
+          title: data.title,
+          message: data.message
+        }
+      }
+    }
+  } catch (error) {
+    console.error('服务器端获取数据失败:', error)
+    // 出错时返回默认数据
+    return {
+      props: {
+        initialData: defaultData
+      }
+    }
+  }
 }
