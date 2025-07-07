@@ -62,20 +62,20 @@ export default function Home({ initialData }: HomeProps) {
           <meta property="og:title" content={data.title} />
           <meta property="og:description" content={data.message} />
           <meta property="og:type" content="website" />
-          <meta property="og:image" content="/favicon.ico" />
-          <meta property="og:image:width" content="256" />
-          <meta property="og:image:height" content="256" />
-          <meta property="og:image:type" content="image/x-icon" />
+          <meta property="og:image" content="https://edit-board.vercel.app/api/icon" />
+          <meta property="og:image:width" content="512" />
+          <meta property="og:image:height" content="512" />
+          <meta property="og:image:type" content="image/png" />
           
           {/* Twitter Card 标签 */}
           <meta name="twitter:card" content="summary" />
           <meta name="twitter:title" content={data.title} />
           <meta name="twitter:description" content={data.message} />
-          <meta name="twitter:image" content="/favicon.ico" />
+          <meta name="twitter:image" content="https://edit-board.vercel.app/api/icon" />
           
           {/* 微信专用标签 */}
-          <meta property="og:image:secure_url" content="/favicon.ico" />
-          <meta name="image" content="/favicon.ico" />
+          <meta property="og:image:secure_url" content="https://edit-board.vercel.app/api/icon" />
+          <meta name="image" content="https://edit-board.vercel.app/api/icon" />
           
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="color-scheme" content="light" />
@@ -110,20 +110,20 @@ export default function Home({ initialData }: HomeProps) {
         <meta property="og:title" content={data.title} />
         <meta property="og:description" content={data.message} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="/favicon.ico" />
-        <meta property="og:image:width" content="256" />
-        <meta property="og:image:height" content="256" />
-        <meta property="og:image:type" content="image/x-icon" />
+        <meta property="og:image" content="https://edit-board.vercel.app/api/icon" />
+        <meta property="og:image:width" content="512" />
+        <meta property="og:image:height" content="512" />
+        <meta property="og:image:type" content="image/png" />
         
         {/* Twitter Card 标签 */}
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={data.title} />
         <meta name="twitter:description" content={data.message} />
-        <meta name="twitter:image" content="/favicon.ico" />
+        <meta name="twitter:image" content="https://edit-board.vercel.app/api/icon" />
         
         {/* 微信专用标签 */}
-        <meta property="og:image:secure_url" content="/favicon.ico" />
-        <meta name="image" content="/favicon.ico" />
+        <meta property="og:image:secure_url" content="https://edit-board.vercel.app/api/icon" />
+        <meta name="image" content="https://edit-board.vercel.app/api/icon" />
         
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content="light" />
