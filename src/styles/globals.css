@@ -29,9 +29,9 @@ body {
   :root {
     --background: #ffffff;
     --foreground: #171717;
-  }
-  
-  body {
+}
+
+body {
     background: #ffffff !important;
     color: #171717 !important;
   }

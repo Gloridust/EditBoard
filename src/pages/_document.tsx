@@ -3,7 +3,23 @@ import { Html, Head, Main, NextScript } from "next/document";
 export default function Document() {
   return (
     <Html lang="zh-CN" className="light">
-      <Head />
+      <Head>
+        {/* 基础图标 */}
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        
+        {/* 预览图标相关 */}
+        <meta property="og:image" content="/favicon.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="512" />
+        <meta property="og:image:height" content="512" />
+        <meta name="twitter:image" content="/favicon.png" />
+        
+        {/* 微信分享图标 */}
+        <meta name="image" content="/favicon.png" />
+        <meta property="og:image:secure_url" content="/favicon.png" />
+      </Head>
       <body className="bg-gray-50 text-gray-900">
         <Main />
         <NextScript />

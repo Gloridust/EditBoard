@@ -17,9 +17,6 @@ export default function Home({ initialData }: HomeProps) {
   const [copySuccess, setCopySuccess] = useState(false)
   const [mounted, setMounted] = useState(false)
 
-  // 纯白色 SVG 图片的 data URL
-  const whiteImageDataUrl = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630' viewBox='0 0 1200 630'%3E%3Crect width='100%25' height='100%25' fill='%23FFFFFF'/%3E%3C/svg%3E"
-
   const fetchData = async () => {
     setIsLoading(true)
     try {
@@ -60,19 +57,30 @@ export default function Home({ initialData }: HomeProps) {
         <Head>
           <title>{data.title}</title>
           <meta name="description" content={data.message} />
+          
+          {/* Open Graph 标签 */}
           <meta property="og:title" content={data.title} />
           <meta property="og:description" content={data.message} />
           <meta property="og:type" content="website" />
-          <meta property="og:image" content={whiteImageDataUrl} />
-          <meta property="og:image:width" content="1200" />
-          <meta property="og:image:height" content="630" />
-          <meta name="twitter:card" content="summary_large_image" />
+          <meta property="og:image" content="/favicon.png" />
+          <meta property="og:image:width" content="512" />
+          <meta property="og:image:height" content="512" />
+          <meta property="og:image:type" content="image/png" />
+          
+          {/* Twitter Card 标签 */}
+          <meta name="twitter:card" content="summary" />
           <meta name="twitter:title" content={data.title} />
           <meta name="twitter:description" content={data.message} />
-          <meta name="twitter:image" content={whiteImageDataUrl} />
+          <meta name="twitter:image" content="/favicon.png" />
+          
+          {/* 微信专用标签 */}
+          <meta property="og:image:secure_url" content="/favicon.png" />
+          <meta name="image" content="/favicon.png" />
+          
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="color-scheme" content="light" />
           <link rel="icon" href="/favicon.ico" />
+          <link rel="apple-touch-icon" href="/favicon.png" />
         </Head>
         <main className="min-h-screen bg-gray-50 py-12 px-4 text-gray-900" style={{ colorScheme: 'light' }}>
           <div className="max-w-2xl mx-auto">
@@ -97,19 +105,30 @@ export default function Home({ initialData }: HomeProps) {
       <Head>
         <title>{data.title}</title>
         <meta name="description" content={data.message} />
+        
+        {/* Open Graph 标签 */}
         <meta property="og:title" content={data.title} />
         <meta property="og:description" content={data.message} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content={whiteImageDataUrl} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="og:image" content="/favicon.png" />
+        <meta property="og:image:width" content="512" />
+        <meta property="og:image:height" content="512" />
+        <meta property="og:image:type" content="image/png" />
+        
+        {/* Twitter Card 标签 */}
+        <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={data.title} />
         <meta name="twitter:description" content={data.message} />
-        <meta name="twitter:image" content={whiteImageDataUrl} />
+        <meta name="twitter:image" content="/favicon.png" />
+        
+        {/* 微信专用标签 */}
+        <meta property="og:image:secure_url" content="/favicon.png" />
+        <meta name="image" content="/favicon.png" />
+        
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content="light" />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
       </Head>
 
       <main className="min-h-screen bg-gray-50 py-12 px-4 text-gray-900" style={{ colorScheme: 'light' }}>
