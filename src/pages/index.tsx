@@ -63,8 +63,8 @@ export default function Home({ initialData }: HomeProps) {
           <meta property="og:description" content={data.message} />
           <meta property="og:type" content="website" />
           <meta property="og:image" content="/favicon.png" />
-          <meta property="og:image:width" content="512" />
-          <meta property="og:image:height" content="512" />
+          <meta property="og:image:width" content="300" />
+          <meta property="og:image:height" content="300" />
           <meta property="og:image:type" content="image/png" />
           
           {/* Twitter Card 标签 */}
@@ -111,8 +111,8 @@ export default function Home({ initialData }: HomeProps) {
         <meta property="og:description" content={data.message} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="/favicon.png" />
-        <meta property="og:image:width" content="512" />
-        <meta property="og:image:height" content="512" />
+        <meta property="og:image:width" content="300" />
+        <meta property="og:image:height" content="300" />
         <meta property="og:image:type" content="image/png" />
         
         {/* Twitter Card 标签 */}
