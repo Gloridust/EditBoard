@@ -62,7 +62,7 @@ export default function Home({ initialData }: HomeProps) {
           <meta property="og:title" content={data.title} />
           <meta property="og:description" content={data.message} />
           <meta property="og:type" content="website" />
-          <meta property="og:image" content="/favicon.png" />
+          <meta property="og:image" content="/favicon.ico" />
           <meta property="og:image:width" content="300" />
           <meta property="og:image:height" content="300" />
           <meta property="og:image:type" content="image/png" />
@@ -71,16 +71,16 @@ export default function Home({ initialData }: HomeProps) {
           <meta name="twitter:card" content="summary" />
           <meta name="twitter:title" content={data.title} />
           <meta name="twitter:description" content={data.message} />
-          <meta name="twitter:image" content="/favicon.png" />
+          <meta name="twitter:image" content="/favicon.ico" />
           
           {/* 微信专用标签 */}
-          <meta property="og:image:secure_url" content="/favicon.png" />
-          <meta name="image" content="/favicon.png" />
+          <meta property="og:image:secure_url" content="/favicon.ico" />
+          <meta name="image" content="/favicon.ico" />
           
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="color-scheme" content="light" />
           <link rel="icon" href="/favicon.ico" />
-          <link rel="apple-touch-icon" href="/favicon.png" />
+          <link rel="apple-touch-icon" href="/favicon.ico" />
         </Head>
         <main className="min-h-screen bg-gray-50 py-12 px-4 text-gray-900" style={{ colorScheme: 'light' }}>
           <div className="max-w-2xl mx-auto">
@@ -110,7 +110,7 @@ export default function Home({ initialData }: HomeProps) {
         <meta property="og:title" content={data.title} />
         <meta property="og:description" content={data.message} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="/favicon.png" />
+        <meta property="og:image" content="/favicon.ico" />
         <meta property="og:image:width" content="300" />
         <meta property="og:image:height" content="300" />
         <meta property="og:image:type" content="image/png" />
@@ -119,16 +119,16 @@ export default function Home({ initialData }: HomeProps) {
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={data.title} />
         <meta name="twitter:description" content={data.message} />
-        <meta name="twitter:image" content="/favicon.png" />
+        <meta name="twitter:image" content="/favicon.ico" />
         
         {/* 微信专用标签 */}
-        <meta property="og:image:secure_url" content="/favicon.png" />
-        <meta name="image" content="/favicon.png" />
+        <meta property="og:image:secure_url" content="/favicon.ico" />
+        <meta name="image" content="/favicon.ico" />
         
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content="light" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
       </Head>
 
       <main className="min-h-screen bg-gray-50 py-12 px-4 text-gray-900" style={{ colorScheme: 'light' }}>
