@@ -11,9 +11,9 @@ export default function Document() {
         
         {/* 预览图标相关 */}
         <meta property="og:image" content="/favicon.ico" />
-        <meta property="og:image:type" content="image/png" />
-        <meta property="og:image:width" content="300" />
-        <meta property="og:image:height" content="300" />
+        <meta property="og:image:type" content="image/x-icon" />
+        <meta property="og:image:width" content="256" />
+        <meta property="og:image:height" content="256" />
         <meta name="twitter:image" content="/favicon.ico" />
         
         {/* 微信分享图标 */}
