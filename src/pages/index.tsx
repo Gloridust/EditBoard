@@ -17,6 +17,9 @@ export default function Home({ initialData }: HomeProps) {
   const [copySuccess, setCopySuccess] = useState(false)
   const [mounted, setMounted] = useState(false)
 
+  // 纯白色 SVG 图片的 data URL
+  const whiteImageDataUrl = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630' viewBox='0 0 1200 630'%3E%3Crect width='100%25' height='100%25' fill='%23FFFFFF'/%3E%3C/svg%3E"
+
   const fetchData = async () => {
     setIsLoading(true)
     try {
@@ -60,9 +63,13 @@ export default function Home({ initialData }: HomeProps) {
           <meta property="og:title" content={data.title} />
           <meta property="og:description" content={data.message} />
           <meta property="og:type" content="website" />
-          <meta name="twitter:card" content="summary" />
+          <meta property="og:image" content={whiteImageDataUrl} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content={data.title} />
           <meta name="twitter:description" content={data.message} />
+          <meta name="twitter:image" content={whiteImageDataUrl} />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="color-scheme" content="light" />
           <link rel="icon" href="/favicon.ico" />
@@ -93,9 +100,13 @@ export default function Home({ initialData }: HomeProps) {
         <meta property="og:title" content={data.title} />
         <meta property="og:description" content={data.message} />
         <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary" />
+        <meta property="og:image" content={whiteImageDataUrl} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={data.title} />
         <meta name="twitter:description" content={data.message} />
+        <meta name="twitter:image" content={whiteImageDataUrl} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content="light" />
         <link rel="icon" href="/favicon.ico" />
